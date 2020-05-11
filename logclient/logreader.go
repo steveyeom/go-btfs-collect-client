@@ -1,9 +1,9 @@
 package logclient
 
 import (
-	"github.com/steveyeom/go-btfs-logclient/logproto"
 	"fmt"
 	"github.com/golang/protobuf/ptypes"
+	"github.com/steveyeom/go-btfs-logclient/logproto"
 	"log"
 	"sync"
 	"time"
