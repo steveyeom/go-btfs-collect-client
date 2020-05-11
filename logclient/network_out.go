@@ -12,10 +12,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/steveyeom/go-btfs-logclient/logproto"
 	"github.com/gogo/protobuf/proto"
 	"github.com/golang/snappy"
 	"github.com/jpillora/backoff"
+	"github.com/steveyeom/go-btfs-logclient/logproto"
 )
 
 var (
@@ -46,9 +46,9 @@ func init() {
 
 func NewNetworkOut(cfg *Configuration) (*NetworkOut, error) {
 	networkOut := NetworkOut{
-		conf:      cfg,
-		stopChan:  make(chan struct{}),
-		inputChan: make(chan []Entry),
+		conf:       cfg,
+		stopChan:   make(chan struct{}),
+		inputChan:  make(chan []Entry),
 		httpClient: httpClient,
 	}
 	networkOut.waitGroup.Add(1)

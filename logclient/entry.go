@@ -1,8 +1,8 @@
 package logclient
 
 import (
-	"github.com/steveyeom/go-btfs-logclient/logproto"
 	"fmt"
+	"github.com/steveyeom/go-btfs-logclient/logproto"
 )
 
 type Entry interface {
