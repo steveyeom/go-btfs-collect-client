@@ -1,4 +1,4 @@
-module github.com/steveyeom/go-btfs-logclient
+module github.com/TRON-US/go-btfs-collect-client
 
 require (
 	github.com/gogo/protobuf v1.3.1

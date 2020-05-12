@@ -2,8 +2,8 @@ package logclient
 
 import (
 	"fmt"
+	btproto "github.com/TRON-US/go-btfs-collect-client/proto"
 	"github.com/golang/protobuf/ptypes"
-	"github.com/steveyeom/go-btfs-logclient/logproto"
 	"log"
 	"sync"
 	"time"
@@ -52,7 +52,7 @@ func (logReader *LogReader) run() {
 			for _, inEnt := range inEntries {
 				le, ok := inEnt.(LineEntry)
 				if !ok {
-					log.Printf("Error: LogReader: %s", fmt.Errorf("expected *logproto.Entry type, but got %T", inEnt.Value()))
+					log.Printf("Error: LogReader: %s", fmt.Errorf("expected *btproto.Entry type, but got %T", inEnt.Value()))
 					return
 				}
 				lineEntries = append(lineEntries, le)
@@ -76,7 +76,7 @@ func (logReader *LogReader) run() {
 	}
 }
 
-// Send a batch after converting lines to logproto.Entry's
+// Send a batch after converting lines to btproto.Entry's
 func (logReader *LogReader) sendBatch(lines []Entry) error {
 	ts, err := ptypes.TimestampProto(time.Now())
 	if err != nil {
@@ -85,7 +85,7 @@ func (logReader *LogReader) sendBatch(lines []Entry) error {
 	var protoEntries []Entry
 	for _, line := range lines {
 		le, _ := line.(LineEntry)
-		protoEntries = append(protoEntries, ProtoEntry{&logproto.Entry{
+		protoEntries = append(protoEntries, ProtoEntry{&btproto.Entry{
 			Timestamp: ts,
 			Line:      le.Text,
 		}})

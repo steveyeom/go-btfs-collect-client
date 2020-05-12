@@ -2,7 +2,7 @@ package logclient
 
 import (
 	"fmt"
-	"github.com/steveyeom/go-btfs-logclient/logproto"
+	"github.com/TRON-US/go-btfs-collect-client/proto"
 )
 
 type Entry interface {
@@ -38,7 +38,7 @@ func (line LineEntry) SetValue(v interface{}) error {
 }
 
 type ProtoEntry struct {
-	Pentry *logproto.Entry
+	Pentry *proto.Entry
 }
 
 func (pe ProtoEntry) Type() int {
@@ -50,9 +50,9 @@ func (pe ProtoEntry) Value() interface{} {
 }
 
 func (pe ProtoEntry) SetValue(v interface{}) error {
-	ent, ok := v.(*logproto.Entry)
+	ent, ok := v.(*proto.Entry)
 	if !ok {
-		return fmt.Errorf("expected *logproto.Entry type, but got %T", v)
+		return fmt.Errorf("expected *proto.Entry type, but got %T", v)
 	}
 	pe.Pentry = ent
 	return nil
