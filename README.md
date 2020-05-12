@@ -1,2 +1,2 @@
-# go-btfs-logclient
+# go-btfs-collect-client
 initial merge
