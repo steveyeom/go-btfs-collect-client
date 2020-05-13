@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	logclient "github.com/steveyeom/go-btfs-logclient/logclient"
+	logclient "github.com/TRON-US/go-btfs-collect-client/logclient"
 )
 
 func main() {

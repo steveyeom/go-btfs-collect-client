@@ -12,10 +12,10 @@ import (
 	"sync"
 	"time"
 
+	btproto "github.com/TRON-US/go-btfs-collect-client/proto"
 	"github.com/gogo/protobuf/proto"
 	"github.com/golang/snappy"
 	"github.com/jpillora/backoff"
-	"github.com/steveyeom/go-btfs-logclient/logproto"
 )
 
 var (
@@ -113,20 +113,20 @@ func (netOut *NetworkOut) run() {
 }
 
 func (netOut *NetworkOut) sendBatch(entries []Entry) error {
-	var streams []*logproto.Stream
-	var protoEntries []*logproto.Entry
+	var streams []*btproto.Stream
+	var protoEntries []*btproto.Entry
 	for _, entry := range entries {
-		proent, ok := entry.Value().(*logproto.Entry)
+		proent, ok := entry.Value().(*btproto.Entry)
 		if !ok {
-			return fmt.Errorf("expected *logproto.Entry type, but got %T", entry.Value())
+			return fmt.Errorf("expected *btproto.Entry type, but got %T", entry.Value())
 		}
 		protoEntries = append(protoEntries, proent)
 	}
-	streams = append(streams, &logproto.Stream{
+	streams = append(streams, &btproto.Stream{
 		Labels:  netOut.conf.Labels,
 		Entries: protoEntries,
 	})
-	request := logproto.PushRequest{
+	request := btproto.PushRequest{
 		Streams: streams,
 	}
 	data, err := proto.Marshal(&request)
